@@ -12,7 +12,10 @@ export const appConfig: ApplicationConfig = {
      providePrimeNG({
             theme: {
                 preset: Aura
-            }
+            },
+            ripple: true,
+            inputVariant: 'filled',
+            
         }),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
