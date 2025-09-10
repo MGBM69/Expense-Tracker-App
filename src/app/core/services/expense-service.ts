@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Expense } from '../models/expense.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,11 @@ export class ExpenseService {
   private http=inject(HttpClient);
 
   getExpenses(){
-    this.http.get<Expense[]>(this.API_URL);
+    return this.http.get<Expense[]>(this.API_URL);
   }
 
   getExpensesById(id:string){
-    this.http.get<Expense>(`${this.API_URL}/${id}`);
+    return this.http.get<Expense>(`${this.API_URL}/${id}`);
   }
 
   createExpense(expense:Omit<Expense,'id'>){

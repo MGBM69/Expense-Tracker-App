@@ -1,0 +1,13 @@
+<p-card [header]="isEditMode()? 'Edit Expense':'Add Expense'">
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+        <div class="row g-3">
+            <div class="col-12 col-md-6">
+                <div class="form-group">
+                    <label for="amount" class="form-label">Amount</label>
+                    <p-inputnumber inputId="amount" formControlName="amount" mode="currency" currency="LKR" [showButtons]="true" styleClass="w-100"/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</p-card>
