@@ -1,16 +1,23 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ExpenseService } from '../../../core/services/expense-service';
 import { ToastModule } from 'primeng/toast'
 import { MessageService } from 'primeng/api';
-import { Expense } from '../../../core/models/expense.model';
+import { Expense, ExpenseCatagory, PaymentMethod} from '../../../core/models/expense.model';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DatePickerModule } from 'primeng/datepicker';
+import { SelectModule } from 'primeng/select';
+import { InputTextModule } from 'primeng/inputtext';
+import { ChipModule } from 'primeng/chip';
+import { TextareaModule } from 'primeng/textarea';
+import { ButtonModule } from 'primeng/button';
+
 
 @Component({
   selector: 'app-expense-form',
-  imports: [CardModule,ReactiveFormsModule,InputNumberModule],
+  imports: [CardModule,ReactiveFormsModule,InputNumberModule,DatePickerModule,SelectModule,InputTextModule,ChipModule,TextareaModule,ButtonModule,RouterLink,ToastModule],
   templateUrl: './expense-form.html',
   styleUrl: './expense-form.css',
   providers: [MessageService]
@@ -25,6 +32,15 @@ export class ExpenseForm implements OnInit{
   #expenseService=inject(ExpenseService);
   #messageService=inject(MessageService);
   #routes=inject(Router);
+  categories=Object.values(ExpenseCatagory).map((category)=>({
+    name:category,
+    code:category,
+  }));
+  paymentMethods=Object.values(PaymentMethod).map((method)=>({
+    name:method,
+    code:method,
+  }));
+  tags=signal<string[]>([]);
 
   ngOnInit(): void {
     this.initExpenseForm();
@@ -49,6 +65,8 @@ export class ExpenseForm implements OnInit{
       notes:[''],
     })
   }
+
+  
 
   private loadExpense(id:string){
     this.#expenseService.getExpensesById(id).subscribe({
@@ -104,10 +122,12 @@ export class ExpenseForm implements OnInit{
                detail: `Expense ${this.isEditMode()? 'updated':'created'} Successfully!`
                });
 
-              //  this.expenseForm.reset();
+                this.expenseForm.reset();
               //  this.isEditMode.set(false);
               //  this.id.set(null);
-              this.#routes.navigate(['/expenses']);
+              setTimeout(()=>{
+                this.#routes.navigate(['/expenses']);
+              },2000)
           },
 
           error:(error)=>{
@@ -124,6 +144,21 @@ export class ExpenseForm implements OnInit{
 
     }
   }
-  
+
+  addTag(tag:string){
+    if(tag && !this.tags().includes(tag)){
+      this.tags.update((preveTags)=>[...preveTags,tag]);
+      
+    }
+
+  }
+  removeTag(tag:string){
+    this.tags.update((prevTags)=>prevTags.filter((t)=>t!==tag));
+
+  }
+  isInvalid(formControlName:string){
+    const control=this.expenseForm.get(formControlName);
+    return control?.invalid && control?.touched;
+  }
 
 }

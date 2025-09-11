@@ -1,12 +1,80 @@
+
+<p-toast />
+
 <p-card [header]="isEditMode()? 'Edit Expense':'Add Expense'">
     <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
         <div class="row g-3">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-6 ">
                 <div class="form-group">
                     <label for="amount" class="form-label">Amount</label>
-                    <p-inputnumber inputId="amount" formControlName="amount" mode="currency" currency="LKR" [showButtons]="true" styleClass="w-100"/>
+                    <p-inputnumber inputId="amount" formControlName="amount" mode="currency" currency="LKR" [showButtons]="true" styleClass="w-100" [invalid]="isInvalid('amount')"/>
+
+                    
+                </div>
+                
+                
+            </div>
+
+            <div class="col-12 col-md-6 ">
+                <div class="form-group">
+                    <label for="date" class="form-label">Date</label>
+                    <p-datepicker formControlName="date" inputId="over_label" showIcon iconDisplay="input" styleClass="w-100" [invalid]="isInvalid('date')"/>
+
+                    
                 </div>
             </div>
+
+            <div class="col-12 col-md-6 ">
+                <div class="form-group">
+                    <label for="date" class="form-label">Date</label>
+                    <p-select [options]="categories" formControlName="category" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Expense Category" styleClass="w-100" [invalid]="isInvalid('category')">
+
+                    </p-select>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 ">
+                <div class="form-group">
+                    <label for="date" class="form-label">Payment Method</label>
+                    <p-select [options]="paymentMethods" formControlName="paymentMethod" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a payment method" styleClass="w-100" [invalid]="isInvalid('paymentMethod')">
+
+                    </p-select>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 ">
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <input pInputText type="text" id="description" placeholder="Description" formControlName="description" Class="w-100" [invalid]="isInvalid('description')" />
+                </div>
+            </div>
+            <div class="col-12 col-md-6 ">
+                <div class="form-group">
+                    <label for="tags" class="form-label">Tags</label>
+                    <input pInputText type="text" #tagInput id="tags" placeholder="Add a tag and Enter"  Class="w-100" (keydown.enter)="
+                        $event.preventDefault();
+
+                        addTag(tagInput.value);tagInput.value=''" />
+                </div>
+                <small>Press Enter to add the tag</small>
+                <br>
+                @for(tag of tags();track $index){
+                    <p-chip [label]="tag" [removable]="true" (onRemove)="removeTag(tag)"/>
+                }
+            </div>
+
+            <div class="col-12 col-md-6 ">
+                <div class="form-group">
+                    <label for="notes" class="form-label">Notes</label>
+                    <textarea rows="3" cols="3" pTextarea formControlName="notes"  class="w-100"></textarea>
+                </div>
+            </div>
+            
+        </div>
+        <div class="d-flex jutify-content-end gap-2">
+            <p-button label="Submit" type="submit" severity="success" />
+            <p-button label="Cancel" type="button"  severity="secondary" [routerLink]="'/expenses'" />
+            
         </div>
     </form>
 

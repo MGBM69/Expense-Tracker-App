@@ -1,3 +1,68 @@
 {
-  "expenses":[]
+  "expenses": [
+    {
+      "id": "874d",
+      "amount": 1000,
+      "date": "2025-09-11",
+      "category": {
+        "name": "Food",
+        "code": "Food"
+      },
+      "paymentMethod": {
+        "name": "Cash",
+        "code": "Cash"
+      },
+      "description": "test Description",
+      "tags": [],
+      "notes": ""
+    },
+    {
+      "id": "f95e",
+      "amount": 1000,
+      "date": "2025-09-11",
+      "category": {
+        "name": "Utilities",
+        "code": "Utilities"
+      },
+      "paymentMethod": {
+        "name": "Debit card",
+        "code": "Debit card"
+      },
+      "description": "test Description",
+      "tags": [],
+      "notes": "test note"
+    },
+    {
+      "id": "502a",
+      "amount": 2000,
+      "date": "2025-09-11",
+      "category": {
+        "name": "Transport",
+        "code": "Transport"
+      },
+      "paymentMethod": {
+        "name": "Debit card",
+        "code": "Debit card"
+      },
+      "description": "test2 description",
+      "tags": [],
+      "notes": "test2 Note"
+    },
+    {
+      "id": "0e1c",
+      "amount": 3000,
+      "date": "2025-09-11",
+      "category": {
+        "name": "Shopping",
+        "code": "Shopping"
+      },
+      "paymentMethod": {
+        "name": "Cash",
+        "code": "Cash"
+      },
+      "description": "test3 Description",
+      "tags": [],
+      "notes": "test3 Description"
+    }
+  ]
 }
