@@ -25,7 +25,7 @@ export class ExpenseService {
 
   }
 
-  updateExpense(id:number,expense:Expense){
+  updateExpense(id:string,expense:Expense){
       return this.http.put<Expense>(`${this.API_URL}/${id}`,expense);
   }
 

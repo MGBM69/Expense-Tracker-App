@@ -25,7 +25,7 @@ import { ButtonModule } from 'primeng/button';
 export class ExpenseForm implements OnInit{
   
   isEditMode=signal(false);
-  id=signal<number|null>(null);
+  id=signal<string|null>(null);
   expenseForm!:FormGroup;
   #formBUilder=inject(FormBuilder)
   #router=inject(ActivatedRoute);
@@ -48,7 +48,7 @@ export class ExpenseForm implements OnInit{
    const id= this.#router.snapshot.paramMap.get('id');
    if(id){
     this.isEditMode.set(true);
-    this.id.set(+id)
+    this.id.set(id)
     this.loadExpense(id);
 
    }
