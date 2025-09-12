@@ -29,7 +29,7 @@ export class ExpenseService {
       return this.http.put<Expense>(`${this.API_URL}/${id}`,expense);
   }
 
-  deleteExpense(id:number){
+  deleteExpense(id:string){
     return this.http.delete<Expense>(`${this.API_URL}/${id}`);
   }
 }

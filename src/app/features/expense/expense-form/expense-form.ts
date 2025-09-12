@@ -82,7 +82,9 @@ export class ExpenseForm implements OnInit{
         this.expenseForm.patchValue({
           ...expense,
           date:new Date(expense.date),
+          
         })
+        this.tags.update(()=>expense.tax || [])
       },
       error:(error)=>{
         console.log(error);

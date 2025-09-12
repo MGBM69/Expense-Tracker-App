@@ -21,7 +21,7 @@
                 <td>{{ expense.paymentMethod.name }}</td>
                 <td>
                     <p-button icon="pi pi-pencil" aria-label="Edit" severity="info" class="me-2" [routerLink]="['/expenses',expense.id,'edit']" />
-                    <p-button icon="pi pi-trash" aria-label="Edit" severity="danger" />
+                    <p-button icon="pi pi-trash" aria-label="Edit" severity="danger" (Click)="onDelete(expense.id,$event)" />
                 </td>
             </tr>
         </ng-template>
